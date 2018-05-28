@@ -3,9 +3,12 @@ pipeline {
             docker { image 'centos:7' }
     }
     stages {
-        stage('Example') {
+        stage('Build') {
             steps {
-                echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+                sh 'id -u'
+                sh 'sudo yum install gcc'
+                sh 'gcc -o hello.x hello.c'
+                sh './hello.x'
             }
         }
     }
